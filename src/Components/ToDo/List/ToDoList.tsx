@@ -1,14 +1,17 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { FlatList, ListRenderItemInfo, Text } from "react-native";
+import { ToDoType } from "../ToDo";
 import { propsType } from "./types";
 
 const ToDoList = (props: propsType) => {
   return (
-    <View>
-      {props.dataArr.map((toDo: any) => {
-        return <Text key={toDo.id}>{toDo.title}</Text>;
-      })}
-    </View>
+    <FlatList
+      keyExtractor={(item) => item.id.toString()}
+      data={props.dataArr}
+      renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
+        <Text>{item.title}</Text>
+      )}
+    />
   );
 };
 
