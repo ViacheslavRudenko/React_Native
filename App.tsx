@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Navbar from "./src/Components/Navbar/Navbar";
-import AddToDo from "./src/Components/ToDo/ToDa";
+import AddToDo from "./src/Components/ToDo/Input/ToDa";
 import { ToDoTitleType, ToDoType } from "./src/Types/ToDo";
+import ToDoList from "./src/Components/ToDo/List/ToDoList";
 
 export default function App() {
-  const [toDoArr, setToDoArr] = useState([{}]);
+  const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
@@ -22,7 +23,7 @@ export default function App() {
       <Navbar />
       <View style={styles.container}>
         <AddToDo onSubmit={addToDo} />
-        <View></View>
+        <ToDoList dataArr={toDoArr} />
       </View>
     </View>
   );
