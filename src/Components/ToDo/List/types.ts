@@ -1,4 +1,4 @@
-import { ToDoType } from "../../../Types/ToDo";
+import { ToDoType } from "../ToDo";
 
 export type propsType = {
   dataArr: ToDoType[];

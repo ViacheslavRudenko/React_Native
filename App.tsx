@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Navbar from "./src/Components/Navbar/Navbar";
 import AddToDo from "./src/Components/ToDo/Input/ToDa";
-import { ToDoTitleType, ToDoType } from "./src/Types/ToDo";
+import { ToDoTitleType, ToDoType } from "./src/Components/ToDo/ToDo";
 import ToDoList from "./src/Components/ToDo/List/ToDoList";
 
 export default function App() {
