@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View, ActivityIndicator } from "react-native";
 import { getData } from "../../api/getData";
+import Filter from "./FIlter/Filter";
 import AddToDo from "./Input/ToDa";
 import ToDoList from "./List/ToDoList";
 import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
 
 const ToDoBlock = () => {
   const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isInProces, setIsInProcess] = useState<boolean>(true);
+
+  const getToDoList = () => {
+    getData()
+      .then((res) => {
+        setToDoArr(
+          res.data.filter((data: any) => data.completed !== isInProces)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("Error", err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    getData().then((res) => setToDoArr(res.data));
-  }, []);
+    getToDoList();
+  }, [isInProces]);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
@@ -29,11 +48,25 @@ const ToDoBlock = () => {
   return (
     <View style={styles.container}>
       <AddToDo onSubmit={addToDo} />
-      <ToDoList
-        dataArr={toDoArr}
-        onRemove={removeToDo}
+      <Filter
+        isInProces={isInProces}
+        setIsInProcess={setIsInProcess}
+        setIsLoading={setIsLoading}
         setToDoArr={setToDoArr}
       />
+      {isLoading ? (
+        <View style={styles.lodaingContainer}>
+          <ActivityIndicator size={"large"} />
+        </View>
+      ) : (
+        <ToDoList
+          dataArr={toDoArr}
+          onRemove={removeToDo}
+          setToDoArr={setToDoArr}
+          isLoading={isLoading}
+          getToDoList={getToDoList}
+        />
+      )}
     </View>
   );
 };
@@ -44,5 +77,10 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
     paddingVertical: 20,
+  },
+  lodaingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "75%",
   },
 });

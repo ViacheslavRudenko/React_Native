@@ -12,7 +12,12 @@ import { propsType } from "./types";
 const ToDoList = (props: propsType) => {
   return (
     <FlatList
-      refreshControl={<RefreshControl refreshing={false} />}
+      refreshControl={
+        <RefreshControl
+          refreshing={props.isLoading}
+          onRefresh={props.getToDoList}
+        />
+      }
       style={styles.list}
       keyExtractor={(item) => item.id.toString()}
       data={props.dataArr}
