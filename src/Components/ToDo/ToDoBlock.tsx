@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View, ActivityIndicator } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  ImageComponent,
+} from "react-native";
 import { getData } from "../../api/getData";
 import Filter from "./FIlter/Filter";
 import AddToDo from "./Input/ToDa";
@@ -38,7 +44,7 @@ const ToDoBlock = () => {
       completed: false,
     };
 
-    setToDoArr([...toDoArr, newData]);
+    setToDoArr([newData, ...toDoArr]);
   };
 
   const removeToDo = (id: ToDoIdType) => {
