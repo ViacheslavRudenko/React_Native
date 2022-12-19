@@ -1,13 +1,8 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import Navbar from "./src/Components/Navbar/Navbar";
-import ToDoBlock from "./src/Screens/Home/Home";
+import { Navigation } from "./src/Screens/Navigation";
 
 export default function App() {
-  return (
-    <View>
-      <Navbar />
-      <ToDoBlock />
-    </View>
-  );
+  return <Navigation />;
 }
