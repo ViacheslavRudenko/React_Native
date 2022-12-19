@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { ToDoType } from "../../../Screens/Home/ToDo";
+import { ToDoType } from "../../../Screens/Tasks/ToDo";
 import ToDoListItem from "./ToDoListItem";
 import { propsType } from "./types";
 

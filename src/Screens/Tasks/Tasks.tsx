@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Alert, StyleSheet, View, ActivityIndicator } from "react-native";
 import { getData } from "../../api/getData";
+import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
 import AddToDo from "../../Components/ToDo/Input/ToDa";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
 import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
 
-const Home = () => {
+const Tasks = () => {
   const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isInProces, setIsInProcess] = useState<boolean>(true);
@@ -55,9 +56,7 @@ const Home = () => {
         setToDoArr={setToDoArr}
       />
       {isLoading ? (
-        <View style={styles.lodaingContainer}>
-          <ActivityIndicator size={"large"} />
-        </View>
+        <LoadingPage />
       ) : (
         <ToDoList
           dataArr={toDoArr}
@@ -71,16 +70,11 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Tasks;
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
     paddingVertical: 20,
-  },
-  lodaingContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "75%",
   },
 });
