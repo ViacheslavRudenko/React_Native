@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { ToDoType } from "../ToDo";
+import { ToDoType } from "../../../Screens/Home/ToDo";
 
 export type filterTypes = {
   setIsInProcess: Dispatch<boolean>;

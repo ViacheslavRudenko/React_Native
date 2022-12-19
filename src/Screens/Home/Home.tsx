@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  ImageComponent,
-} from "react-native";
+import { Alert, StyleSheet, View, ActivityIndicator } from "react-native";
 import { getData } from "../../api/getData";
-import Filter from "./FIlter/Filter";
-import AddToDo from "./Input/ToDa";
-import ToDoList from "./List/ToDoList";
+import Filter from "../../Components/ToDo/FIlter/Filter";
+import AddToDo from "../../Components/ToDo/Input/ToDa";
+import ToDoList from "../../Components/ToDo/List/ToDoList";
 import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
 
-const ToDoBlock = () => {
+const Home = () => {
   const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isInProces, setIsInProcess] = useState<boolean>(true);
@@ -77,7 +71,7 @@ const ToDoBlock = () => {
   );
 };
 
-export default ToDoBlock;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {

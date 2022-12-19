@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ToDoType } from "../Components/ToDo/ToDo";
+import { ToDoType } from "../Screens/Home/ToDo";
 
 export const getData = () => {
   return axios.get("https://jsonplaceholder.typicode.com/todos");
