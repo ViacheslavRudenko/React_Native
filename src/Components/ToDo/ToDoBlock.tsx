@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { getData } from "../api/getData";
 import AddToDo from "./Input/ToDa";
 import ToDoList from "./List/ToDoList";
 import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
 
 const ToDoBlock = () => {
   const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
+
+  useEffect(() => {
+    getData().then((res) => setToDoArr(res.data));
+  }, []);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {

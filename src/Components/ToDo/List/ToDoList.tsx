@@ -1,5 +1,10 @@
 import React from "react";
-import { FlatList, ListRenderItemInfo, StyleSheet } from "react-native";
+import {
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+  StyleSheet,
+} from "react-native";
 import { ToDoType } from "../ToDo";
 import ToDoListItem from "./ToDoListItem";
 import { propsType } from "./types";
@@ -7,6 +12,7 @@ import { propsType } from "./types";
 const ToDoList = (props: propsType) => {
   return (
     <FlatList
+      refreshControl={<RefreshControl refreshing={false} />}
       style={styles.list}
       keyExtractor={(item) => item.id.toString()}
       data={props.dataArr}

@@ -4,14 +4,17 @@ import { TouchableOpacity, View, Text, StyleSheet, Button } from "react-native";
 const ToDoListItem = (props: any) => {
   const chnageStatusToDo = () => {
     const { id, title, isDone } = props.item;
-    props.setToDoArr((prev: any) => [
-      ...prev.filter((toDo: any) => toDo.id !== props.item.id),
-      {
-        id,
-        title,
-        isDone: !isDone,
-      },
-    ]);
+    const newData = {
+      id,
+      title,
+      isDone: !isDone,
+    };
+
+    props.setToDoArr((prev: any) => {
+      const newArrData = prev.filter((toDo: any) => toDo.id !== id);
+      !isDone ? newArrData.push(newData) : newArrData.unshift(newData);
+      return newArrData;
+    });
   };
 
   return (
@@ -22,7 +25,7 @@ const ToDoListItem = (props: any) => {
       >
         <Text
           style={
-            !props.item.isDone ? styles.listItemText : styles.listItemTextDone
+            props.item.isDone ? styles.listItemTextDone : styles.listItemText
           }
         >
           {props.item.title}
