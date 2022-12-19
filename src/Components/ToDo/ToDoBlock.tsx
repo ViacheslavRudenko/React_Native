@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { getData } from "../api/getData";
+import { getData } from "../../api/getData";
 import AddToDo from "./Input/ToDa";
 import ToDoList from "./List/ToDoList";
 import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
