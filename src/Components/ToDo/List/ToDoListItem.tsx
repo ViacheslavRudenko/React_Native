@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { TouchableOpacity, View, Text, StyleSheet, Button } from "react-native";
+import React from "react";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Alert,
+} from "react-native";
 
 const ToDoListItem = (props: any) => {
   const chnageStatusToDo = () => {
@@ -17,6 +24,25 @@ const ToDoListItem = (props: any) => {
     });
   };
 
+  const confirmDelete = () => {
+    Alert.alert(
+      "Are your sure?",
+      "Are you sure you want to remove this task?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            props.onRemove(props.item.id);
+          },
+        },
+
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.listItemBox}>
       <TouchableOpacity
@@ -31,7 +57,7 @@ const ToDoListItem = (props: any) => {
           {props.item.title}
         </Text>
       </TouchableOpacity>
-      <Button title="Delete" onPress={() => props.onRemove(props.item.id)} />
+      <Button title="X" onPress={confirmDelete} />
     </View>
   );
 };
@@ -47,7 +73,7 @@ const styles = StyleSheet.create({
   listItemText: { textDecorationLine: "none" },
   listItemTextDone: { textDecorationLine: "line-through" },
   listItemContent: {
-    width: "70%",
+    width: "90%",
     padding: 10,
     borderColor: "grey",
     borderStyle: "solid",

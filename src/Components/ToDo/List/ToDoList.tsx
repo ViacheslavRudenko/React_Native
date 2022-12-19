@@ -63,13 +63,16 @@ const styles = StyleSheet.create({
   list: { height: "100%" },
   btnTop: {
     position: "absolute",
-    bottom: "40%",
+    bottom: "20%",
     right: 20,
     borderColor: "grey",
     borderStyle: "solid",
     borderWidth: 2,
     borderRadius: 10,
     backgroundColor: "#fff",
+    shadowColor: "black",
+    shadowRadius: 4,
+    shadowOpacity: 0.5,
   },
   btnTopNone: {
     display: "none",
