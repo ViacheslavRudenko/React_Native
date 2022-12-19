@@ -16,7 +16,7 @@ const ToDoBlock = () => {
     const newData: ToDoType = {
       id: Date.now().toString(),
       title,
-      isDone: false,
+      completed: false,
     };
 
     setToDoArr([...toDoArr, newData]);

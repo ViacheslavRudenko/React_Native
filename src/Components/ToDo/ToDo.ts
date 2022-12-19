@@ -1,7 +1,7 @@
 export type ToDoType = {
   id: string;
   title: string;
-  isDone: boolean;
+  completed: boolean;
 };
 
 export type ToDoTitleType = string;
