@@ -1,34 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
+  Button,
   FlatList,
   ListRenderItemInfo,
   RefreshControl,
   StyleSheet,
+  View,
 } from "react-native";
 import { ToDoType } from "../ToDo";
 import ToDoListItem from "./ToDoListItem";
 import { propsType } from "./types";
 
 const ToDoList = (props: propsType) => {
+  const [isShowBtnTop, setIsShowBtnTop] = useState(false);
+  const scrollRef: any = useRef();
+
+  const handleScroll = (event: any) => {
+    const verticalPosition = event.nativeEvent.contentOffset.y;
+    verticalPosition > 0 ? setIsShowBtnTop(true) : setIsShowBtnTop(false);
+  };
+
+  const onPressTouch = () => {
+    scrollRef.current?.scrollToOffset({
+      y: 0,
+      animated: true,
+    });
+  };
+
   return (
-    <FlatList
-      refreshControl={
-        <RefreshControl
-          refreshing={props.isLoading}
-          onRefresh={props.getToDoList}
-        />
-      }
-      style={styles.list}
-      keyExtractor={(item) => item.id.toString()}
-      data={props.dataArr}
-      renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
-        <ToDoListItem
-          item={item}
-          onRemove={props.onRemove}
-          setToDoArr={props.setToDoArr}
-        />
-      )}
-    />
+    <>
+      <FlatList
+        ref={scrollRef}
+        refreshControl={
+          <RefreshControl
+            refreshing={props.isLoading}
+            onRefresh={props.getToDoList}
+          />
+        }
+        style={styles.list}
+        keyExtractor={(item) => item.id.toString()}
+        data={props.dataArr}
+        onScroll={handleScroll}
+        renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
+          <ToDoListItem
+            item={item}
+            onRemove={props.onRemove}
+            setToDoArr={props.setToDoArr}
+          />
+        )}
+      />
+
+      <View style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}>
+        <Button title={"Top"} onPress={onPressTouch} />
+      </View>
+    </>
   );
 };
 
@@ -36,4 +61,17 @@ export default ToDoList;
 
 const styles = StyleSheet.create({
   list: { height: "100%" },
+  btnTop: {
+    position: "absolute",
+    bottom: "40%",
+    right: 20,
+    borderColor: "grey",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#fff",
+  },
+  btnTopNone: {
+    display: "none",
+  },
 });
