@@ -16,10 +16,11 @@ const Tasks = (props: tasksPropsType) => {
     getData()
       .then((res) => {
         setToDoArr(
-          res.data.filter(
-            (data: any) =>
-              data.completed !== isInProces &&
-              data.userId === props.route.params.id
+          res.data.filter((data: any) =>
+            !props.route.params.id
+              ? data.completed !== isInProces
+              : data.completed !== isInProces &&
+                data.userId === props.route.params.id
           )
         );
       })
@@ -53,7 +54,7 @@ const Tasks = (props: tasksPropsType) => {
 
   return (
     <View style={styles.container}>
-      <AddToDo onSubmit={addToDo} />
+      {props.route.params.id && <AddToDo onSubmit={addToDo} />}
       <Filter
         isInProces={isInProces}
         setIsInProcess={setIsInProcess}

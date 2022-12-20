@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert, Button, View } from "react-native";
 import { getUsers } from "../../api/getUsers";
 import LoadingPage from "../../Components/Loading/Loading";
 import UserList from "../../Components/User/UserList";
@@ -31,6 +31,15 @@ const Users = (props: userPropsType) => {
     <LoadingPage />
   ) : (
     <View>
+      <View>
+        <Button
+          title="Show all tasts"
+          color="grey"
+          onPress={() => {
+            props.navigation.navigate("Tasks", {});
+          }}
+        />
+      </View>
       <UserList
         users={users}
         isLoading={isLoading}

@@ -37,6 +37,6 @@ export default UserList;
 
 const styles = StyleSheet.create({
   list: {
-    padding: 20,
+    paddingHorizontal: 20,
   },
 });
