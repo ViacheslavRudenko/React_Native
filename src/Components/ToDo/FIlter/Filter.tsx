@@ -1,30 +1,30 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { filterTypes } from "./types";
 
 const Filter = (props: filterTypes) => {
   return (
     <View style={styles.box}>
-      <View style={props.isInProces && styles.activeBtn}>
-        <Button
-          title="In process"
-          onPress={() => {
-            props.setIsInProcess(true);
-            props.setToDoArr([]);
-            props.setIsLoading(true);
-          }}
-        />
-      </View>
-      <View style={!props.isInProces && styles.activeBtn}>
-        <Button
-          title="Done"
-          onPress={() => {
-            props.setIsInProcess(false);
-            props.setToDoArr([]);
-            props.setIsLoading(true);
-          }}
-        />
-      </View>
+      <Pressable
+        onPress={() => {
+          props.setIsInProcess(true);
+          props.setToDoArr([]);
+          props.setIsLoading(true);
+        }}
+        style={props.isInProces && styles.activeBtn}
+      >
+        <Text style={styles.text}>In process</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          props.setIsInProcess(false);
+          props.setToDoArr([]);
+          props.setIsLoading(true);
+        }}
+        style={!props.isInProces && styles.activeBtn}
+      >
+        <Text style={styles.text}>Done</Text>
+      </Pressable>
     </View>
   );
 };
@@ -41,5 +41,8 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderStyle: "solid",
     borderBottomWidth: 1,
+  },
+  text: {
+    fontWeight: "700",
   },
 });

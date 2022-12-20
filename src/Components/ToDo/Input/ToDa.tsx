@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Button,
+  Alert,
+  Pressable,
+} from "react-native";
+import { Text } from "react-native-elements";
 import { propsType } from "./types";
 
 const AddToDo = (props: propsType) => {
@@ -26,8 +34,15 @@ const AddToDo = (props: propsType) => {
         autoCorrect={false}
         autoCapitalize={"none"}
       />
-      <Button title="Add" onPress={pressHandler} />
-      <Button title="Clean" onPress={cleanInput} />
+
+      <View style={styles.btnBox}>
+        <Pressable onPress={pressHandler} style={styles.btnAction}>
+          <Text>Add</Text>
+        </Pressable>
+        <Pressable onPress={cleanInput} style={styles.btnAction}>
+          <Text>Clean</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -42,10 +57,20 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    width: "70%",
+    width: "60%",
     padding: 10,
     borderBottomColor: "grey",
     borderBottomWidth: 1,
     borderBottomStyle: "solid",
+  },
+  btnBox: { flexDirection: "row", alignSelf: "flex-end" },
+  btnAction: {
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "grey",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginLeft: 10,
   },
 });

@@ -3,8 +3,10 @@ import {
   Button,
   FlatList,
   ListRenderItemInfo,
+  Pressable,
   RefreshControl,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 import { ToDoType } from "../../../Screens/Tasks/types";
@@ -52,9 +54,15 @@ const ToDoList = (props: propsType) => {
         )}
       />
 
-      <View style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}>
+      <Pressable
+        style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}
+        onPress={onPressTouch}
+      >
+        <Text>Top</Text>
+      </Pressable>
+      {/* <View style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}>
         <Button title={"Top"} onPress={onPressTouch} />
-      </View>
+      </View> */}
     </>
   );
 };
@@ -70,11 +78,12 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderStyle: "solid",
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 30,
     backgroundColor: "#fff",
     shadowColor: "black",
     shadowRadius: 4,
     shadowOpacity: 0.5,
+    padding: 15,
   },
   btnTopNone: {
     display: "none",
