@@ -15,7 +15,7 @@ export const Navigation = () => {
           options={{ title: "Users" }}
         />
         <Stack.Screen
-          name="Tasks"
+          name={"Tasks"}
           component={Tasks}
           options={{ title: "Tasks" }}
         />

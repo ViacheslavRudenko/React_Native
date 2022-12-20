@@ -5,6 +5,7 @@ import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
 import AddToDo from "../../Components/ToDo/Input/ToDa";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
+import { Navigation } from "../Navigation";
 import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
@@ -34,6 +35,9 @@ const Tasks = (props: tasksPropsType) => {
   };
 
   useEffect(() => {
+    props.navigation.setOptions({
+      title: `${props.route.params.userName} tasks`,
+    });
     getToDoList();
   }, [isInProces]);
 

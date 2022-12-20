@@ -36,7 +36,7 @@ const UserListItem = (props: userListPropsItemType) => {
               onPress={() => {
                 props.navigation.navigate("Tasks", {
                   id: props.item.id,
-                  userName: props.item.username,
+                  userName: props.item.name,
                 });
               }}
             />
