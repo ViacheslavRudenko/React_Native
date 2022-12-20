@@ -4,10 +4,6 @@ import {
   ListRenderItemInfo,
   RefreshControl,
   StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
 } from "react-native";
 
 import { usersType } from "../../Screens/User/types";

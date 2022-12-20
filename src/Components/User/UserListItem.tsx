@@ -4,6 +4,13 @@ import { userListPropsItemType } from "./types";
 
 const UserListItem = (props: userListPropsItemType) => {
   const [isShowMore, setIsShowMore] = useState(false);
+
+  const showTasks = () => {
+    props.navigation.navigate("Tasks", {
+      id: props.item.id,
+      userName: props.item.name,
+    });
+  };
   return (
     <View style={styles.userBox}>
       <View style={styles.user}>
@@ -30,16 +37,7 @@ const UserListItem = (props: userListPropsItemType) => {
                 setIsShowMore(!isShowMore);
               }}
             />
-            <Button
-              title="Show tasks"
-              color="grey"
-              onPress={() => {
-                props.navigation.navigate("Tasks", {
-                  id: props.item.id,
-                  userName: props.item.name,
-                });
-              }}
-            />
+            <Button title="Show tasks" color="grey" onPress={showTasks} />
           </View>
         </View>
       </View>

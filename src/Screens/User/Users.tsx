@@ -35,9 +35,7 @@ const Users = (props: userPropsType) => {
         <Button
           title="Show all tasts"
           color="grey"
-          onPress={() => {
-            props.navigation.navigate("Tasks", {});
-          }}
+          onPress={() => props.navigation.navigate("Tasks", {})}
         />
       </View>
       <UserList

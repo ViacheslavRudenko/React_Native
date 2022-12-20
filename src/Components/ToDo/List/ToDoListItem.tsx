@@ -55,6 +55,13 @@ const ToDoListItem = (props: propsItemType) => {
     );
   };
 
+  const showUserTasks = () => {
+    props.navigation.navigate("Tasks", {
+      id: props.item.userId,
+      userName: userNick,
+    });
+  };
+
   return (
     <View style={styles.listItemBox}>
       <TouchableOpacity
@@ -70,15 +77,7 @@ const ToDoListItem = (props: propsItemType) => {
         </Text>
 
         {!props.userId && (
-          <Pressable
-            style={styles.btnUserName}
-            onPress={() => {
-              props.navigation.navigate("Tasks", {
-                id: props.item.userId,
-                userName: userNick,
-              });
-            }}
-          >
+          <Pressable style={styles.btnUserName} onPress={showUserTasks}>
             <Text style={styles.btnUserNameText}>{userNick}</Text>
           </Pressable>
         )}
