@@ -57,7 +57,9 @@ const ToDoListItem = (props: any) => {
           {props.item.title}
         </Text>
       </TouchableOpacity>
-      <Button title="X" onPress={confirmDelete} />
+      <View style={styles.btnDel}>
+        <Button title="X" onPress={confirmDelete} />
+      </View>
     </View>
   );
 };
@@ -81,5 +83,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5,
     textDecorationLine: "none",
+  },
+  btnDel: {
+    paddingRight: 5,
   },
 });
