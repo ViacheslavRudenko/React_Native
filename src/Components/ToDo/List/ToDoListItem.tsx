@@ -4,7 +4,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Alert,
   Pressable,
 } from "react-native";
@@ -82,12 +81,9 @@ const ToDoListItem = (props: propsItemType) => {
           </Pressable>
         )}
       </TouchableOpacity>
-      <Pressable onPress={confirmDelete}>
+      <Pressable style={styles.btnDelBox} onPress={confirmDelete}>
         <Text style={styles.btnDel}>X</Text>
       </Pressable>
-      {/* <View style={styles.btnDel}>
-        <Button title="X" onPress={confirmDelete} />
-      </View> */}
     </View>
   );
 };
@@ -113,10 +109,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
     textDecorationLine: "none",
   },
+  btnDelBox: {
+    width: 30,
+  },
   btnDel: {
-    paddingRight: 10,
     fontSize: 20,
-    fontWeight: "bolt",
+    fontWeight: "700",
   },
   btnUserName: {
     textAlign: "center",
