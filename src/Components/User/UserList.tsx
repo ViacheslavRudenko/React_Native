@@ -27,7 +27,7 @@ const UserList = (props: userListPropsType) => {
       keyExtractor={(item) => item.id.toString()}
       data={props.users}
       renderItem={({ item }: ListRenderItemInfo<usersType>) => (
-        <UserListItem item={item} />
+        <UserListItem item={item} navigation={props.navigation} />
       )}
     />
   );

@@ -14,3 +14,7 @@ export type usersType = {
   website: string;
   company: { name: string; catchPhrase: string; bs: string };
 };
+
+export type userPropsType = {
+  navigation: any;
+};

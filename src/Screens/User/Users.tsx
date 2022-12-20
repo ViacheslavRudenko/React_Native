@@ -3,9 +3,9 @@ import { Alert, View } from "react-native";
 import { getUsers } from "../../api/getUsers";
 import LoadingPage from "../../Components/Loading/Loading";
 import UserList from "../../Components/User/UserList";
-import { usersType } from "./types";
+import { userPropsType, usersType } from "./types";
 
-const Users = () => {
+const Users = (props: userPropsType) => {
   const [users, setUsers] = useState<usersType[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -35,6 +35,7 @@ const Users = () => {
         users={users}
         isLoading={isLoading}
         getUsersList={getUsersList}
+        navigation={props.navigation}
       />
     </View>
   );

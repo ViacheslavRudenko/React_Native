@@ -5,9 +5,9 @@ import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
 import AddToDo from "../../Components/ToDo/Input/ToDa";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
-import { ToDoIdType, ToDoTitleType, ToDoType } from "./ToDo";
+import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 
-const Tasks = () => {
+const Tasks = (props: tasksPropsType) => {
   const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isInProces, setIsInProcess] = useState<boolean>(true);
@@ -16,7 +16,11 @@ const Tasks = () => {
     getData()
       .then((res) => {
         setToDoArr(
-          res.data.filter((data: any) => data.completed !== isInProces)
+          res.data.filter(
+            (data: any) =>
+              data.completed !== isInProces &&
+              data.userId === props.route.params.id
+          )
         );
       })
       .catch((err) => {
@@ -37,6 +41,7 @@ const Tasks = () => {
       id: Date.now().toString(),
       title,
       completed: false,
+      userId: props.route.params.id,
     };
 
     setToDoArr([newData, ...toDoArr]);

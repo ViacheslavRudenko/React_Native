@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ToDoIdType, ToDoType } from "../../../Screens/Tasks/ToDo";
+import { ToDoIdType, ToDoType } from "../../../Screens/Tasks/types";
 
 export type propsType = {
   dataArr: ToDoType[];

@@ -26,9 +26,20 @@ const UserListItem = (props: userListPropsItemType) => {
             <Button
               title={!isShowMore ? "Show more" : "Hide info"}
               color="grey"
-              onPress={() => setIsShowMore(!isShowMore)}
+              onPress={() => {
+                setIsShowMore(!isShowMore);
+              }}
             />
-            <Button title="Show tasks" color="grey" />
+            <Button
+              title="Show tasks"
+              color="grey"
+              onPress={() => {
+                props.navigation.navigate("Tasks", {
+                  id: props.item.id,
+                  userName: props.item.username,
+                });
+              }}
+            />
           </View>
         </View>
       </View>
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
   img: {
     width: 100,
     height: 110,
-    marginRight: 10,
+    marginRight: 20,
   },
   nameBlock: {
     paddingBottom: 10,
