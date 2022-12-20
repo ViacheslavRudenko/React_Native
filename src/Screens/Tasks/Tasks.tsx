@@ -36,7 +36,9 @@ const Tasks = (props: tasksPropsType) => {
 
   useEffect(() => {
     props.navigation.setOptions({
-      title: `${props.route.params.userName} tasks`,
+      title: props.route.params.userName
+        ? `${props.route.params.userName} tasks`
+        : `All tasks`,
     });
     getToDoList();
   }, [isInProces]);

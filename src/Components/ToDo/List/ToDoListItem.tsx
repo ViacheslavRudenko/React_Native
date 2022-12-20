@@ -7,8 +7,9 @@ import {
   Button,
   Alert,
 } from "react-native";
+import { propsItemType } from "./types";
 
-const ToDoListItem = (props: any) => {
+const ToDoListItem = (props: propsItemType) => {
   const chnageStatusToDo = () => {
     const { id, title, completed } = props.item;
     const newData = {
@@ -18,6 +19,8 @@ const ToDoListItem = (props: any) => {
     };
 
     props.setToDoArr((prev: any) => {
+      console.log(prev);
+
       const newArrData = prev.filter((toDo: any) => toDo.id !== id);
       !completed ? newArrData.push(newData) : newArrData.unshift(newData);
       return newArrData;

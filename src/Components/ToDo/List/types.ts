@@ -8,3 +8,9 @@ export type propsType = {
   isLoading: boolean;
   getToDoList: any;
 };
+
+export type propsItemType = {
+  item: ToDoType;
+  onRemove: (id: ToDoIdType) => void;
+  setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
+};
