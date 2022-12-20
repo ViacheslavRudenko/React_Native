@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Alert, Button, View } from "react-native";
 import { useSelector } from "react-redux";
-import { getUsers } from "../../api/getUsers";
 import LoadingPage from "../../Components/Loading/Loading";
 import UserList from "../../Components/User/UserList";
 import { useActions } from "../../hooks/useActions";
 import { RootState } from "../../store/root-reducer";
-import { userPropsType, usersType } from "./types";
+import { userPropsType } from "./types";
 
 const Users = (props: userPropsType) => {
-  const [users, setUsers] = useState<usersType[] | []>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { axiosUsersData } = useActions();
   const { data, loading, err } = useSelector((state: RootState) => state.Users);
 
   useEffect(() => {
     axiosUsersData();
+    err && Alert.alert("Error", err);
   }, []);
 
   return loading ? (
@@ -24,7 +22,7 @@ const Users = (props: userPropsType) => {
     <View style={{ height: "100%" }}>
       <View>
         <Button
-          title="Show all tasts"
+          title="Show all tasks"
           color="grey"
           onPress={() => props.navigation.navigate("Tasks", {})}
         />
@@ -32,7 +30,6 @@ const Users = (props: userPropsType) => {
       <UserList
         users={data}
         isLoading={loading}
-        // getUsersList={getUsersList}
         navigation={props.navigation}
       />
     </View>

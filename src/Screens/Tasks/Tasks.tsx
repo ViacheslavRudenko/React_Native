@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
@@ -12,7 +12,9 @@ import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<boolean>(true);
   const { axiosData, AddNewTask, RemoveTask } = useActions();
-  const { data, loading } = useSelector((state: RootState) => state.TasksData);
+  const { data, loading, err } = useSelector(
+    (state: RootState) => state.TasksData
+  );
 
   const getToDoList = () => {
     return data.filter((data: any) =>
@@ -23,6 +25,7 @@ const Tasks = (props: tasksPropsType) => {
   };
   useEffect(() => {
     axiosData();
+    err && Alert.alert("Error", err);
   }, []);
 
   useEffect(() => {
