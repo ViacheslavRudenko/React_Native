@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   TouchableOpacity,
   View,
@@ -6,21 +6,30 @@ import {
   StyleSheet,
   Button,
   Alert,
+  Pressable,
 } from "react-native";
+import { color } from "react-native-elements/dist/helpers";
+import { getUser } from "../../../api/getUsers";
+import { usersType } from "../../../Screens/User/types";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
+  const [userNick, setUserNick] = useState("");
+
+  useEffect(() => {
+    getUser(props.item.userId).then((resp: any) => {
+      setUserNick(resp.data.username);
+    });
+  }, []);
+
   const chnageStatusToDo = () => {
-    const { id, title, completed } = props.item;
+    const { id, completed } = props.item;
     const newData = {
-      id,
-      title,
+      ...props.item,
       completed: !completed,
     };
 
     props.setToDoArr((prev: any) => {
-      console.log(prev);
-
       const newArrData = prev.filter((toDo: any) => toDo.id !== id);
       !completed ? newArrData.push(newData) : newArrData.unshift(newData);
       return newArrData;
@@ -59,6 +68,15 @@ const ToDoListItem = (props: propsItemType) => {
         >
           {props.item.title}
         </Text>
+
+        <Pressable
+          style={styles.btnUserName}
+          onPress={() => {
+            console.log("sdf");
+          }}
+        >
+          <Text style={styles.btnUserNameText}>{`@${userNick}`}</Text>
+        </Pressable>
       </TouchableOpacity>
       <View style={styles.btnDel}>
         <Button title="X" onPress={confirmDelete} />
@@ -89,5 +107,12 @@ const styles = StyleSheet.create({
   },
   btnDel: {
     paddingRight: 5,
+  },
+  btnUserName: {
+    textAlign: "center",
+    width: "100%",
+  },
+  btnUserNameText: {
+    textAlign: "right",
   },
 });
