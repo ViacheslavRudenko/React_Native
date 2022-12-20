@@ -5,18 +5,20 @@ import {
   RefreshControl,
   StyleSheet,
 } from "react-native";
+import { useActions } from "../../hooks/useActions";
 
 import { usersType } from "../../Screens/User/types";
 import { userListPropsType } from "./types";
 import UserListItem from "./UserListItem";
 
 const UserList = (props: userListPropsType) => {
+  const { axiosUsersData } = useActions();
   return (
     <FlatList
       refreshControl={
         <RefreshControl
           refreshing={props.isLoading}
-          onRefresh={props.getUsersList}
+          onRefresh={axiosUsersData}
         />
       }
       style={styles.list}

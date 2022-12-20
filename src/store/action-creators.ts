@@ -1,7 +1,7 @@
 import * as TAsksActionCreators from "./Tasks/action";
-import * as UserActivityActionCreators from "./UserActivity/action";
+import * as UserActionCreators from "./User/action";
 
 export default {
   ...TAsksActionCreators,
-  ...UserActivityActionCreators,
+  ...UserActionCreators,
 };
