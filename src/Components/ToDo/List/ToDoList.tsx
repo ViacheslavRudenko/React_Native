@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import { useActions } from "../../../hooks/useActions";
 import { ToDoType } from "../../../Screens/Tasks/types";
 import ToDoListItem from "./ToDoListItem";
 import { propsType } from "./types";
@@ -14,6 +15,7 @@ import { propsType } from "./types";
 const ToDoList = (props: propsType) => {
   const [isShowBtnTop, setIsShowBtnTop] = useState(false);
   const scrollRef: any = useRef();
+  const { axiosData } = useActions();
 
   const handleScroll = (event: any) => {
     const verticalPosition = event.nativeEvent.contentOffset.y;
@@ -32,10 +34,7 @@ const ToDoList = (props: propsType) => {
       <FlatList
         ref={scrollRef}
         refreshControl={
-          <RefreshControl
-            refreshing={props.isLoading}
-            onRefresh={props.getToDoList}
-          />
+          <RefreshControl refreshing={props.isLoading} onRefresh={axiosData} />
         }
         style={styles.list}
         keyExtractor={(item) => item.id.toString()}
@@ -45,7 +44,6 @@ const ToDoList = (props: propsType) => {
           <ToDoListItem
             item={item}
             onRemove={props.onRemove}
-            setToDoArr={props.setToDoArr}
             userId={props.userId}
             navigation={props.navigation}
           />
@@ -58,9 +56,6 @@ const ToDoList = (props: propsType) => {
       >
         <Text>Top</Text>
       </Pressable>
-      {/* <View style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}>
-        <Button title={"Top"} onPress={onPressTouch} />
-      </View> */}
     </>
   );
 };

@@ -8,11 +8,12 @@ import {
   Pressable,
 } from "react-native";
 import { getUser } from "../../../api/getUsers";
-import { ToDoType } from "../../../Screens/Tasks/types";
+import { useActions } from "../../../hooks/useActions";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
   const [userNick, setUserNick] = useState("");
+  const { EditTask, RemoveTask } = useActions();
 
   useEffect(() => {
     !props.userId &&
@@ -22,17 +23,12 @@ const ToDoListItem = (props: propsItemType) => {
   }, []);
 
   const chnageStatusToDo = () => {
-    const { id, completed } = props.item;
     const newData = {
       ...props.item,
-      completed: !completed,
+      completed: !props.item.completed,
     };
 
-    props.setToDoArr((prev: ToDoType[]) => {
-      const newArrData = prev.filter((toDo: ToDoType) => toDo.id !== id);
-      !completed ? newArrData.push(newData) : newArrData.unshift(newData);
-      return newArrData;
-    });
+    EditTask(newData);
   };
 
   const confirmDelete = () => {
@@ -43,7 +39,7 @@ const ToDoListItem = (props: propsItemType) => {
         {
           text: "Yes",
           onPress: () => {
-            props.onRemove(props.item.id);
+            RemoveTask(props.item.id);
           },
         },
 

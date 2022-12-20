@@ -4,9 +4,9 @@ import { ToDoIdType, ToDoType } from "../../../Screens/Tasks/types";
 export type propsType = {
   dataArr: ToDoType[];
   onRemove: (id: ToDoIdType) => void;
-  setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
+  // setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
   isLoading: boolean;
-  getToDoList: any;
+  //getToDoList: any;
   userId: string | number;
   navigation: any;
 };
@@ -14,7 +14,7 @@ export type propsType = {
 export type propsItemType = {
   item: ToDoType;
   onRemove: (id: ToDoIdType) => void;
-  setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
+  //setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
   userId: string | number;
   navigation: any;
 };

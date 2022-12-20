@@ -1,36 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
-import { getData } from "../../api/getData";
+import { StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
 import AddToDo from "../../Components/ToDo/Input/ToDa";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
+import { useActions } from "../../hooks/useActions";
+import { RootState } from "../../store/root-reducer";
 import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
-  const [toDoArr, setToDoArr] = useState<ToDoType[] | []>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isInProces, setIsInProcess] = useState<boolean>(true);
+  const { axiosData, AddNewTask, RemoveTask } = useActions();
+  const { data, loading } = useSelector((state: RootState) => state.TasksData);
 
   const getToDoList = () => {
-    getData()
-      .then((res) => {
-        setToDoArr(
-          res.data.filter((data: any) =>
-            !props.route.params.id
-              ? data.completed !== isInProces
-              : data.completed !== isInProces &&
-                data.userId === props.route.params.id
-          )
-        );
-      })
-      .catch((err) => {
-        Alert.alert("Error", err.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    return data.filter((data: any) =>
+      !props.route.params.id
+        ? data.completed !== isInProces
+        : data.completed !== isInProces && data.userId === props.route.params.id
+    );
   };
+  useEffect(() => {
+    axiosData();
+  }, []);
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -38,7 +31,6 @@ const Tasks = (props: tasksPropsType) => {
         ? `${props.route.params.userName} tasks`
         : `All tasks`,
     });
-    getToDoList();
   }, [isInProces, props.route.params.userName]);
 
   const addToDo = (title: ToDoTitleType): void => {
@@ -49,31 +41,24 @@ const Tasks = (props: tasksPropsType) => {
       userId: props.route.params.id,
     };
 
-    setToDoArr([newData, ...toDoArr]);
+    AddNewTask(newData);
   };
 
   const removeToDo = (id: ToDoIdType) => {
-    setToDoArr((prev) => prev.filter((todo) => todo.id !== id));
+    RemoveTask(id);
   };
 
   return (
     <View style={styles.container}>
       {props.route.params.id && <AddToDo onSubmit={addToDo} />}
-      <Filter
-        isInProces={isInProces}
-        setIsInProcess={setIsInProcess}
-        setIsLoading={setIsLoading}
-        setToDoArr={setToDoArr}
-      />
-      {isLoading ? (
+      <Filter isInProces={isInProces} setIsInProcess={setIsInProcess} />
+      {loading ? (
         <LoadingPage />
       ) : (
         <ToDoList
-          dataArr={toDoArr}
+          dataArr={getToDoList()}
           onRemove={removeToDo}
-          setToDoArr={setToDoArr}
-          isLoading={isLoading}
-          getToDoList={getToDoList}
+          isLoading={loading}
           userId={props.route.params.id}
           navigation={props.navigation}
         />

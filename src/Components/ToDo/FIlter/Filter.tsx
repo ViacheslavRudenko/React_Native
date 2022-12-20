@@ -8,8 +8,6 @@ const Filter = (props: filterTypes) => {
       <Pressable
         onPress={() => {
           props.setIsInProcess(true);
-          props.setToDoArr([]);
-          props.setIsLoading(true);
         }}
         style={props.isInProces && styles.activeBtn}
       >
@@ -18,8 +16,6 @@ const Filter = (props: filterTypes) => {
       <Pressable
         onPress={() => {
           props.setIsInProcess(false);
-          props.setToDoArr([]);
-          props.setIsLoading(true);
         }}
         style={!props.isInProces && styles.activeBtn}
       >
