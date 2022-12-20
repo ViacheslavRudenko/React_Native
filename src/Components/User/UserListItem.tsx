@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { userListPropsItemType } from "./types";
 
 const UserListItem = (props: userListPropsItemType) => {

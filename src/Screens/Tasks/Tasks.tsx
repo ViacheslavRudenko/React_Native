@@ -25,7 +25,6 @@ const Tasks = (props: tasksPropsType) => {
         );
       })
       .catch((err) => {
-        console.log(err);
         Alert.alert("Error", err.message);
       })
       .finally(() => {

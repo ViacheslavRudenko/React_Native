@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Button,
-  Alert,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, TextInput, Alert, Pressable } from "react-native";
 import { Text } from "react-native-elements";
 import { propsType } from "./types";
 

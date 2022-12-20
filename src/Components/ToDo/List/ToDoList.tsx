@@ -1,13 +1,11 @@
 import React, { useState, useRef } from "react";
 import {
-  Button,
   FlatList,
   ListRenderItemInfo,
   Pressable,
   RefreshControl,
   StyleSheet,
   Text,
-  View,
 } from "react-native";
 import { ToDoType } from "../../../Screens/Tasks/types";
 import ToDoListItem from "./ToDoListItem";
