@@ -30,7 +30,7 @@ const Users = (props: userPropsType) => {
   return isLoading ? (
     <LoadingPage />
   ) : (
-    <View>
+    <View style={{ height: "100%" }}>
       <View>
         <Button
           title="Show all tasts"

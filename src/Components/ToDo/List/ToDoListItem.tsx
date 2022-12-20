@@ -82,9 +82,12 @@ const ToDoListItem = (props: propsItemType) => {
           </Pressable>
         )}
       </TouchableOpacity>
-      <View style={styles.btnDel}>
+      <Pressable onPress={confirmDelete}>
+        <Text style={styles.btnDel}>X</Text>
+      </Pressable>
+      {/* <View style={styles.btnDel}>
         <Button title="X" onPress={confirmDelete} />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -96,21 +99,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    borderColor: "grey",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 10,
   },
   listItemText: { textDecorationLine: "none" },
   listItemTextDone: { textDecorationLine: "line-through" },
   listItemContent: {
     width: "90%",
     padding: 10,
-    borderColor: "grey",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRadius: 5,
     marginTop: 5,
     textDecorationLine: "none",
   },
   btnDel: {
-    paddingRight: 5,
+    paddingRight: 10,
+    fontSize: 20,
+    fontWeight: "bolt",
   },
   btnUserName: {
     textAlign: "center",

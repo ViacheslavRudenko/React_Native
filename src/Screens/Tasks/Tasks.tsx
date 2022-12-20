@@ -40,7 +40,7 @@ const Tasks = (props: tasksPropsType) => {
         : `All tasks`,
     });
     getToDoList();
-  }, [isInProces]);
+  }, [isInProces, props.route.params.userName]);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
@@ -87,6 +87,7 @@ export default Tasks;
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     paddingHorizontal: 30,
     paddingVertical: 20,
   },
