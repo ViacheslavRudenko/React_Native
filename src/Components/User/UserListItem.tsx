@@ -17,7 +17,7 @@ const UserListItem = (props: userListPropsItemType) => {
         <View>
           <Image
             source={{
-              uri: "https://static.vecteezy.com/system/resources/previews/004/773/704/original/a-girl-s-face-with-a-beautiful-smile-a-female-avatar-for-a-website-and-social-network-vector.jpg",
+              uri: "https://picsum.photos/200/300",
             }}
             style={styles.img}
           />
