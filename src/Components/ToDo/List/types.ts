@@ -7,10 +7,12 @@ export type propsType = {
   setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
   isLoading: boolean;
   getToDoList: any;
+  userId: string | number;
 };
 
 export type propsItemType = {
   item: ToDoType;
   onRemove: (id: ToDoIdType) => void;
   setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
+  userId: string | number;
 };

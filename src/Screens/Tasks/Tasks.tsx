@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View, ActivityIndicator } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { getData } from "../../api/getData";
 import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
 import AddToDo from "../../Components/ToDo/Input/ToDa";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
-import { Navigation } from "../Navigation";
 import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
@@ -76,6 +75,7 @@ const Tasks = (props: tasksPropsType) => {
           setToDoArr={setToDoArr}
           isLoading={isLoading}
           getToDoList={getToDoList}
+          userId={props.route.params.id}
         />
       )}
     </View>
