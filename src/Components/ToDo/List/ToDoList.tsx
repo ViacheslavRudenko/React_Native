@@ -47,6 +47,7 @@ const ToDoList = (props: propsType) => {
             onRemove={props.onRemove}
             setToDoArr={props.setToDoArr}
             userId={props.userId}
+            navigation={props.navigation}
           />
         )}
       />

@@ -34,6 +34,8 @@ const Tasks = (props: tasksPropsType) => {
   };
 
   useEffect(() => {
+    console.log(props.route.params);
+
     props.navigation.setOptions({
       title: props.route.params.userName
         ? `${props.route.params.userName} tasks`
@@ -76,6 +78,7 @@ const Tasks = (props: tasksPropsType) => {
           isLoading={isLoading}
           getToDoList={getToDoList}
           userId={props.route.params.id}
+          navigation={props.navigation}
         />
       )}
     </View>

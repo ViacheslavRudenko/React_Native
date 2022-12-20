@@ -8,6 +8,7 @@ export type propsType = {
   isLoading: boolean;
   getToDoList: any;
   userId: string | number;
+  navigation: any;
 };
 
 export type propsItemType = {
@@ -15,4 +16,5 @@ export type propsItemType = {
   onRemove: (id: ToDoIdType) => void;
   setToDoArr: Dispatch<SetStateAction<ToDoType[]>>;
   userId: string | number;
+  navigation: any;
 };

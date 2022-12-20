@@ -9,6 +9,7 @@ import {
   Pressable,
 } from "react-native";
 import { getUser } from "../../../api/getUsers";
+import { ToDoType } from "../../../Screens/Tasks/types";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
@@ -17,7 +18,7 @@ const ToDoListItem = (props: propsItemType) => {
   useEffect(() => {
     !props.userId &&
       getUser(props.item.userId).then((resp: any) => {
-        setUserNick(resp.data.username);
+        setUserNick(resp.data.name);
       });
   }, []);
 
@@ -28,8 +29,8 @@ const ToDoListItem = (props: propsItemType) => {
       completed: !completed,
     };
 
-    props.setToDoArr((prev: any) => {
-      const newArrData = prev.filter((toDo: any) => toDo.id !== id);
+    props.setToDoArr((prev: ToDoType[]) => {
+      const newArrData = prev.filter((toDo: ToDoType) => toDo.id !== id);
       !completed ? newArrData.push(newData) : newArrData.unshift(newData);
       return newArrData;
     });
@@ -72,10 +73,13 @@ const ToDoListItem = (props: propsItemType) => {
           <Pressable
             style={styles.btnUserName}
             onPress={() => {
-              console.log("sdf");
+              props.navigation.navigate("Tasks", {
+                id: props.item.userId,
+                userName: userNick,
+              });
             }}
           >
-            <Text style={styles.btnUserNameText}>{`@${userNick}`}</Text>
+            <Text style={styles.btnUserNameText}>{userNick}</Text>
           </Pressable>
         )}
       </TouchableOpacity>
