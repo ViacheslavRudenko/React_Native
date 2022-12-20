@@ -22,18 +22,18 @@ const UserListItem = (props: userListPropsItemType) => {
           </View>
           <Text>{props.item.company.name}</Text>
           <Text>{props.item.company.bs}</Text>
-          <View>
+          <View style={styles.btnInfoBox}>
             <Button
               title={!isShowMore ? "Show more" : "Hide info"}
               color="grey"
               onPress={() => setIsShowMore(!isShowMore)}
             />
-            <Button title="Show tasks" />
+            <Button title="Show tasks" color="grey" />
           </View>
         </View>
       </View>
       {isShowMore && (
-        <View>
+        <View style={styles.info}>
           <Text>tel: {props.item.phone}</Text>
           <Text>email: {props.item.email}</Text>
           <Text>
@@ -49,7 +49,10 @@ export default UserListItem;
 
 const styles = StyleSheet.create({
   userBox: {
-    paddingBottom: 20,
+    paddingVertical: 20,
+    borderColor: "grey",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
   },
   user: {
     flexDirection: "row",
@@ -62,4 +65,9 @@ const styles = StyleSheet.create({
   nameBlock: {
     paddingBottom: 10,
   },
+  btnInfoBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  info: {},
 });

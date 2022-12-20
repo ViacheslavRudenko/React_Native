@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Alert, View } from "react-native";
+import { Alert, View } from "react-native";
 import { getUsers } from "../../api/getUsers";
 import LoadingPage from "../../Components/Loading/Loading";
 import UserList from "../../Components/User/UserList";
