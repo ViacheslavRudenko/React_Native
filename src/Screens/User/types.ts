@@ -1,3 +1,5 @@
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
+
 export type usersType = {
   id: string;
   name: string;
@@ -16,5 +18,5 @@ export type usersType = {
 };
 
 export type userPropsType = {
-  navigation: any;
+  navigation: NavigationProp<ParamListBase>;
 };

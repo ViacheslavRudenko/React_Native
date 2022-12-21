@@ -7,11 +7,11 @@ import AddToDo from "../../Components/ToDo/Input/ToDo";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
 import { useActions } from "../../hooks/useActions";
 import { RootState } from "../../store/root-reducer";
-import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
+import { tasksPropsType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<any>(true);
-  const { axiosData, AddNewTask, RemoveTask } = useActions();
+  const { axiosData, AddNewTask } = useActions();
   const { loading, err } = useSelector((state: RootState) => state.TasksData);
 
   useEffect(() => {

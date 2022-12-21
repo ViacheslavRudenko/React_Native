@@ -17,7 +17,7 @@ const ToDoListItem = (props: propsItemType) => {
 
   useEffect(() => {
     !props.userId &&
-      getUser(props.item.userId).then((resp: any) => {
+      getUser(props.item.userId).then((resp) => {
         setUserNick(resp.data.name);
       });
   }, []);

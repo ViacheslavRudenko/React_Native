@@ -1,10 +1,11 @@
 import { usersType } from "../../Screens/User/types";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
 export type userListPropsType = {
-  navigation: any;
+  navigation: NavigationProp<ParamListBase>;
 };
 
 export type userListPropsItemType = {
   item: usersType;
-  navigation: any;
+  navigation: NavigationProp<ParamListBase>;
 };

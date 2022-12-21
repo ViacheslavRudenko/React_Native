@@ -16,7 +16,7 @@ import { propsType } from "./types";
 
 const ToDoList = (props: propsType) => {
   const [isShowBtnTop, setIsShowBtnTop] = useState(false);
-  const scrollRef: any = useRef();
+  const scrollRef = useRef<any>();
   const { axiosData } = useActions();
   const { data, loading } = useSelector((state: RootState) => state.TasksData);
 
