@@ -7,18 +7,20 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import { getUser } from "../../../api/getUsers";
+import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
+import { RootState } from "../../../store/root-reducer";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
   const [userNick, setUserNick] = useState("");
   const { EditTask, RemoveTask } = useActions();
+  const data = useSelector((state: RootState) => state.Users.data);
 
   useEffect(() => {
     !props.userId &&
-      getUser(props.item.userId).then((resp) => {
-        setUserNick(resp.data.name);
+      data.filter((item) => {
+        setUserNick(item.name);
       });
   }, []);
 

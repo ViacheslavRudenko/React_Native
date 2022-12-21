@@ -11,7 +11,7 @@ import { tasksPropsType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<any>(true);
-  const { axiosData, AddNewTask } = useActions();
+  const { axiosData, AddNewTask, axiosUsersData } = useActions();
   const { loading, err } = useSelector((state: RootState) => state.TasksData);
 
   useEffect(() => {
@@ -24,6 +24,8 @@ const Tasks = (props: tasksPropsType) => {
         : `All tasks`,
     });
   }, [isInProces, props.route.params.userName]);
+
+  props.route.params.id && axiosUsersData();
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
