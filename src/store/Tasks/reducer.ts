@@ -12,7 +12,18 @@ const reducerJobs = (state = initialState, action: TasksAction): TasksState => {
       return { loading: true, err: "", data: [] };
     }
     case TasksActionTypes.FETCH_TASKS_SUCCESS: {
-      return { loading: false, err: "", data: action.payload };
+      const { data, isCompleted, userId } = action.payload;
+      return {
+        loading: false,
+        err: "",
+        data:
+          userId !== null
+            ? data.filter(
+                (item) =>
+                  item.userId === userId && item.completed !== isCompleted
+              )
+            : data.filter((item) => item.completed !== isCompleted),
+      };
     }
     case TasksActionTypes.FETCH_TASKS_ERROR: {
       return { loading: false, err: action.payload, data: [] };

@@ -10,25 +10,16 @@ import { RootState } from "../../store/root-reducer";
 import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
-  const [isInProces, setIsInProcess] = useState<boolean>(true);
+  const [isInProces, setIsInProcess] = useState<any>(true);
   const { axiosData, AddNewTask, RemoveTask } = useActions();
   const { data, loading, err } = useSelector(
     (state: RootState) => state.TasksData
   );
 
-  const getToDoList = () => {
-    return data.filter((data: any) =>
-      !props.route.params.id
-        ? data.completed !== isInProces
-        : data.completed !== isInProces && data.userId === props.route.params.id
-    );
-  };
   useEffect(() => {
-    axiosData();
+    axiosData(isInProces, props.route.params.id);
     err && Alert.alert("Error", err);
-  }, []);
 
-  useEffect(() => {
     props.navigation.setOptions({
       title: props.route.params.userName
         ? `${props.route.params.userName} tasks`
@@ -47,9 +38,7 @@ const Tasks = (props: tasksPropsType) => {
     AddNewTask(newData);
   };
 
-  const removeToDo = (id: ToDoIdType) => {
-    RemoveTask(id);
-  };
+  const removeToDo = (id: ToDoIdType) => RemoveTask(id);
 
   return (
     <View style={styles.container}>
@@ -59,7 +48,7 @@ const Tasks = (props: tasksPropsType) => {
         <LoadingPage />
       ) : (
         <ToDoList
-          dataArr={getToDoList()}
+          dataArr={data}
           onRemove={removeToDo}
           isLoading={loading}
           userId={props.route.params.id}

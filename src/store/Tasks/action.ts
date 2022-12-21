@@ -3,14 +3,14 @@ import { getData } from "../../api/getData";
 import { ToDoIdType, ToDoType } from "../../Screens/Tasks/types";
 import { TasksActionTypes, TasksAction } from "./types";
 
-export const axiosData = () => {
+export const axiosData = (isCompleted = null, id = null) => {
   return async (dispatch: Dispatch<TasksAction>) => {
     dispatch({ type: TasksActionTypes.FETCH_TASKS });
     await getData()
       .then((resp) =>
         dispatch({
           type: TasksActionTypes.FETCH_TASKS_SUCCESS,
-          payload: resp.data,
+          payload: { data: resp.data, isCompleted: isCompleted, userId: id },
         })
       )
       .catch((err) =>
