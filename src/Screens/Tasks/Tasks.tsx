@@ -3,7 +3,7 @@ import { Alert, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import LoadingPage from "../../Components/Loading/Loading";
 import Filter from "../../Components/ToDo/FIlter/Filter";
-import AddToDo from "../../Components/ToDo/Input/ToDa";
+import AddToDo from "../../Components/ToDo/Input/ToDo";
 import ToDoList from "../../Components/ToDo/List/ToDoList";
 import { useActions } from "../../hooks/useActions";
 import { RootState } from "../../store/root-reducer";
@@ -12,9 +12,7 @@ import { tasksPropsType, ToDoIdType, ToDoTitleType, ToDoType } from "./types";
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<any>(true);
   const { axiosData, AddNewTask, RemoveTask } = useActions();
-  const { data, loading, err } = useSelector(
-    (state: RootState) => state.TasksData
-  );
+  const { loading, err } = useSelector((state: RootState) => state.TasksData);
 
   useEffect(() => {
     axiosData(isInProces, props.route.params.id);
@@ -38,8 +36,6 @@ const Tasks = (props: tasksPropsType) => {
     AddNewTask(newData);
   };
 
-  const removeToDo = (id: ToDoIdType) => RemoveTask(id);
-
   return (
     <View style={styles.container}>
       {props.route.params.id && <AddToDo onSubmit={addToDo} />}
@@ -48,9 +44,6 @@ const Tasks = (props: tasksPropsType) => {
         <LoadingPage />
       ) : (
         <ToDoList
-          dataArr={data}
-          onRemove={removeToDo}
-          isLoading={loading}
           userId={props.route.params.id}
           navigation={props.navigation}
         />

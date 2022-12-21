@@ -9,7 +9,7 @@ import { userPropsType } from "./types";
 
 const Users = (props: userPropsType) => {
   const { axiosUsersData } = useActions();
-  const { data, loading, err } = useSelector((state: RootState) => state.Users);
+  const { loading, err } = useSelector((state: RootState) => state.Users);
 
   useEffect(() => {
     axiosUsersData();
@@ -27,11 +27,7 @@ const Users = (props: userPropsType) => {
           onPress={() => props.navigation.navigate("Tasks", {})}
         />
       </View>
-      <UserList
-        users={data}
-        isLoading={loading}
-        navigation={props.navigation}
-      />
+      <UserList navigation={props.navigation} />
     </View>
   );
 };

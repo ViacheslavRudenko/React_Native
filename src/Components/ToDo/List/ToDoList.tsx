@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
 import { ToDoType } from "../../../Screens/Tasks/types";
+import { RootState } from "../../../store/root-reducer";
 import ToDoListItem from "./ToDoListItem";
 import { propsType } from "./types";
 
@@ -16,6 +18,7 @@ const ToDoList = (props: propsType) => {
   const [isShowBtnTop, setIsShowBtnTop] = useState(false);
   const scrollRef: any = useRef();
   const { axiosData } = useActions();
+  const { data, loading } = useSelector((state: RootState) => state.TasksData);
 
   const handleScroll = (event: any) => {
     const verticalPosition = event.nativeEvent.contentOffset.y;
@@ -34,16 +37,15 @@ const ToDoList = (props: propsType) => {
       <FlatList
         ref={scrollRef}
         refreshControl={
-          <RefreshControl refreshing={props.isLoading} onRefresh={axiosData} />
+          <RefreshControl refreshing={loading} onRefresh={axiosData} />
         }
         style={styles.list}
         keyExtractor={(item) => item.id.toString()}
-        data={props.dataArr}
+        data={data}
         onScroll={handleScroll}
         renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
           <ToDoListItem
             item={item}
-            onRemove={props.onRemove}
             userId={props.userId}
             navigation={props.navigation}
           />
