@@ -6,6 +6,7 @@ import {
   RefreshControl,
   StyleSheet,
   Text,
+  View,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
@@ -34,35 +35,45 @@ const ToDoList = (props: propsType) => {
 
   return (
     <>
-      <FlatList
-        ref={scrollRef}
-        refreshControl={
-          <RefreshControl
-            refreshing={loading}
-            onRefresh={() =>
-              axiosData(props.userId, `completed=${props.completed}`)
+      {data.length ? (
+        <>
+          <FlatList
+            ref={scrollRef}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={() =>
+                  axiosData(props.userId, `completed=${props.completed}`)
+                }
+              />
             }
+            style={styles.list}
+            keyExtractor={(item) => item.id.toString()}
+            data={data}
+            onScroll={handleScroll}
+            renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
+              <ToDoListItem
+                item={item}
+                userId={props.userId}
+                navigation={props.navigation}
+              />
+            )}
           />
-        }
-        style={styles.list}
-        keyExtractor={(item) => item.id.toString()}
-        data={data}
-        onScroll={handleScroll}
-        renderItem={({ item }: ListRenderItemInfo<ToDoType>) => (
-          <ToDoListItem
-            item={item}
-            userId={props.userId}
-            navigation={props.navigation}
-          />
-        )}
-      />
 
-      <Pressable
-        style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}
-        onPress={onPressTouch}
-      >
-        <Text>Top</Text>
-      </Pressable>
+          <Pressable
+            style={isShowBtnTop ? styles.btnTop : styles.btnTopNone}
+            onPress={onPressTouch}
+          >
+            <Text>Top</Text>
+          </Pressable>
+        </>
+      ) : (
+        <View style={styles.empty}>
+          <Text style={styles.emptyText}>
+            {!props.completed ? "No tasks" : "No completed tasks"}
+          </Text>
+        </View>
+      )}
     </>
   );
 };
@@ -87,5 +98,14 @@ const styles = StyleSheet.create({
   },
   btnTopNone: {
     display: "none",
+  },
+  empty: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyText: {
+    fontWeight: "700",
+    fontSize: 20,
   },
 });

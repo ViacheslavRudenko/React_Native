@@ -27,8 +27,8 @@ const UserListItem = (props: userListPropsItemType) => {
             <Text>{props.item.name}</Text>
             <Text>@{props.item.username}</Text>
           </View>
-          <Text>{props.item.company.name}</Text>
-          <Text>{props.item.company.bs}</Text>
+          <Text>{props.item.companyName}</Text>
+          <Text>{props.item.companyPosition}</Text>
           <View style={styles.btnInfoBox}>
             <Pressable
               style={styles.btnDetails}
@@ -50,9 +50,6 @@ const UserListItem = (props: userListPropsItemType) => {
         <View>
           <Text>tel: {props.item.phone}</Text>
           <Text>email: {props.item.email}</Text>
-          <Text>
-            address: {props.item.address.street}, {props.item.address.suite}
-          </Text>
         </View>
       )}
     </View>
