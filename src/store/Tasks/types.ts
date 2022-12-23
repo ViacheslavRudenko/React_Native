@@ -12,6 +12,7 @@ export enum TasksActionTypes {
   FETCH_TASKS_ERROR = "FETCH_TASKS_ERROR",
   REMOVE_TASK = "REMOVE_TASK",
   ADD_TASK = "ADD_TASK",
+  EDIT_TASK = "EDIT_TASK",
 }
 
 interface FetchJobsAction {
@@ -34,10 +35,15 @@ interface AddTask {
   type: TasksActionTypes.ADD_TASK;
   payload: ToDoType;
 }
+interface EditTask {
+  type: TasksActionTypes.EDIT_TASK;
+  payload: { task: ToDoType; taskId: string | number };
+}
 
 export type TasksAction =
   | FetchJobsAction
   | FetchJobsSuccessAction
   | FetchJobsErrorAction
   | RemoveTask
-  | AddTask;
+  | AddTask
+  | EditTask;

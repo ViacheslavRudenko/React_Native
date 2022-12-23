@@ -18,3 +18,14 @@ export const deleteTask = (userId: number | string, taskId: ToDoIdType) => {
     `https://63a025327aaf11ceb8a897ef.mockapi.io/Users/${userId}/Task/${taskId}`
   );
 };
+
+export const editTask = (
+  userId: number | string,
+  taskId: ToDoIdType,
+  task: ToDoType
+) => {
+  return axios.put(
+    `https://63a025327aaf11ceb8a897ef.mockapi.io/Users/${userId}/Task/${taskId}`,
+    task
+  );
+};

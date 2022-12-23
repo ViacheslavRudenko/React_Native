@@ -36,6 +36,16 @@ const reducerJobs = (state = initialState, action: TasksAction): TasksState => {
       };
     }
 
+    case TasksActionTypes.EDIT_TASK: {
+      return {
+        loading: false,
+        err: "",
+        data: state.data.filter(
+          (item) => item.id !== action.payload.taskId && action.payload.task
+        ),
+      };
+    }
+
     default:
       return state;
   }
