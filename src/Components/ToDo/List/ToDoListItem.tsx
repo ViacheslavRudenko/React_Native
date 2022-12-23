@@ -30,7 +30,7 @@ const ToDoListItem = (props: propsItemType) => {
         {
           text: "Yes",
           onPress: () => {
-            deleteOneTask(props.item.id);
+            deleteOneTask(props.item.userId, props.item.id);
           },
         },
 
@@ -61,12 +61,6 @@ const ToDoListItem = (props: propsItemType) => {
         >
           {props.item.title}
         </Text>
-
-        {!props.userId && (
-          <Pressable style={styles.btnUserName} onPress={showUserTasks}>
-            <Text style={styles.btnUserNameText}>@{props.item.username}</Text>
-          </Pressable>
-        )}
       </TouchableOpacity>
       <Pressable style={styles.btnDelBox} onPress={confirmDelete}>
         <Text style={styles.btnDel}>X</Text>

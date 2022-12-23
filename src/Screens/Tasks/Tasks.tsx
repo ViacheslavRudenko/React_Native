@@ -12,14 +12,11 @@ import { tasksPropsType, ToDoTitleType, ToDoType } from "./types";
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<any>(true);
   const { axiosData, addNewTask } = useActions();
-  const { data, loading, err } = useSelector(
-    (state: RootState) => state.TasksData
-  );
+  const { data, loading } = useSelector((state: RootState) => state.TasksData);
 
   useEffect(() => {
-    axiosData(isInProces, props.route.params.id);
-    err && Alert.alert("Error", err);
-  }, []);
+    axiosData(props.route.params.id, `completed=${!isInProces}`);
+  }, [isInProces, props.route.params.id]);
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -27,7 +24,7 @@ const Tasks = (props: tasksPropsType) => {
         ? `${props.route.params.userName} tasks`
         : `All tasks`,
     });
-  }, [data]);
+  }, [data, props.route.params.id]);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
@@ -38,7 +35,7 @@ const Tasks = (props: tasksPropsType) => {
       username: props.route.params.userName,
     };
 
-    addNewTask(newData);
+    addNewTask(props.route.params.id, newData);
   };
 
   return (
@@ -51,6 +48,7 @@ const Tasks = (props: tasksPropsType) => {
         <ToDoList
           userId={props.route.params.id}
           navigation={props.navigation}
+          completed={!isInProces}
         />
       )}
     </View>

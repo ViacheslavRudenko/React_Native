@@ -37,7 +37,12 @@ const ToDoList = (props: propsType) => {
       <FlatList
         ref={scrollRef}
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={axiosData} />
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={() =>
+              axiosData(props.userId, `completed=${props.completed}`)
+            }
+          />
         }
         style={styles.list}
         keyExtractor={(item) => item.id.toString()}

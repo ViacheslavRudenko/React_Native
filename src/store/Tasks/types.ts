@@ -19,11 +19,7 @@ interface FetchJobsAction {
 }
 interface FetchJobsSuccessAction {
   type: TasksActionTypes.FETCH_TASKS_SUCCESS;
-  payload: {
-    data: ToDoType[];
-    isCompleted: boolean | null;
-    userId: null | number | string;
-  };
+  payload: ToDoType[];
 }
 interface FetchJobsErrorAction {
   type: TasksActionTypes.FETCH_TASKS_ERROR;

@@ -4,6 +4,7 @@ import { ToDoType } from "../../../Screens/Tasks/types";
 export type propsType = {
   userId: string | number;
   navigation: NavigationProp<ParamListBase>;
+  completed: boolean;
 };
 
 export type propsItemType = {
