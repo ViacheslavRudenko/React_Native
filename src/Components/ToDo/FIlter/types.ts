@@ -5,3 +5,9 @@ export type filterTypes = {
   setIsInProcess: Dispatch<boolean>;
   isInProces: boolean;
 };
+
+export type filterBtnTypes = {
+  setIsInProcess: Dispatch<boolean>;
+  isInProces: boolean;
+  text: string;
+};
