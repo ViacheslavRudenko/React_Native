@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { getData } from "../../api/getData";
+import { getData, addTask, deleteTask } from "../../api/getData";
 import { ToDoIdType, ToDoType } from "../../Screens/Tasks/types";
 import { TasksActionTypes, TasksAction } from "./types";
 
@@ -22,14 +22,37 @@ export const axiosData = (isCompleted = null, id = null) => {
   };
 };
 
-export const AddNewTask = (task: ToDoType) => {
-  return { type: TasksActionTypes.ADD_NEW_TASK, payload: task };
+export const deleteOneTask = (id: ToDoIdType) => {
+  return async (dispatch: Dispatch<TasksAction>) => {
+    await deleteTask(id)
+      .then((resp) =>
+        dispatch({
+          type: TasksActionTypes.REMOVE_TASK,
+          payload: id,
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: TasksActionTypes.FETCH_TASKS_ERROR,
+          payload: err.message,
+        })
+      );
+  };
 };
-
-export const RemoveTask = (id: ToDoIdType) => {
-  return { type: TasksActionTypes.REMOVE_TASK, payload: id };
-};
-
-export const EditTask = (task: ToDoType) => {
-  return { type: TasksActionTypes.EDIT_TASK, payload: task };
+export const addNewTask = (task: ToDoType) => {
+  return async (dispatch: Dispatch<TasksAction>) => {
+    await addTask(task)
+      .then((resp) =>
+        dispatch({
+          type: TasksActionTypes.ADD_TASK,
+          payload: task,
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: TasksActionTypes.FETCH_TASKS_ERROR,
+          payload: err.message,
+        })
+      );
+  };
 };

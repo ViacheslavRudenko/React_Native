@@ -28,9 +28,6 @@ const reducerJobs = (state = initialState, action: TasksAction): TasksState => {
     case TasksActionTypes.FETCH_TASKS_ERROR: {
       return { loading: false, err: action.payload, data: [] };
     }
-    case TasksActionTypes.ADD_NEW_TASK: {
-      return { loading: false, err: "", data: [action.payload, ...state.data] };
-    }
     case TasksActionTypes.REMOVE_TASK: {
       return {
         loading: false,
@@ -38,14 +35,11 @@ const reducerJobs = (state = initialState, action: TasksAction): TasksState => {
         data: state.data.filter((item) => item.id !== action.payload),
       };
     }
-    case TasksActionTypes.EDIT_TASK: {
+    case TasksActionTypes.ADD_TASK: {
       return {
         loading: false,
         err: "",
-        data: [
-          action.payload,
-          ...state.data.filter((item) => item.id !== action.payload.id),
-        ],
+        data: [action.payload, ...state.data],
       };
     }
 

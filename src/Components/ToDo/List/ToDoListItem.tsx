@@ -11,7 +11,7 @@ import { useActions } from "../../../hooks/useActions";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
-  const { EditTask, RemoveTask } = useActions();
+  const { addNewTask, deleteOneTask } = useActions();
 
   const chnageStatusToDo = () => {
     const newData = {
@@ -19,7 +19,7 @@ const ToDoListItem = (props: propsItemType) => {
       completed: !props.item.completed,
     };
 
-    EditTask(newData);
+    // EditTask(newData);
   };
 
   const confirmDelete = () => {
@@ -30,7 +30,7 @@ const ToDoListItem = (props: propsItemType) => {
         {
           text: "Yes",
           onPress: () => {
-            RemoveTask(props.item.id);
+            deleteOneTask(props.item.id);
           },
         },
 

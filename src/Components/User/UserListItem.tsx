@@ -17,7 +17,7 @@ const UserListItem = (props: userListPropsItemType) => {
         <View>
           <Image
             source={{
-              uri: "https://picsum.photos/200/300",
+              uri: props.item.avatar,
             }}
             style={styles.img}
           />

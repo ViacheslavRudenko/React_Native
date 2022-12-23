@@ -11,21 +11,23 @@ import { tasksPropsType, ToDoTitleType, ToDoType } from "./types";
 
 const Tasks = (props: tasksPropsType) => {
   const [isInProces, setIsInProcess] = useState<any>(true);
-  const { axiosData, AddNewTask, axiosUsersData } = useActions();
-  const { loading, err } = useSelector((state: RootState) => state.TasksData);
+  const { axiosData, addNewTask } = useActions();
+  const { data, loading, err } = useSelector(
+    (state: RootState) => state.TasksData
+  );
 
   useEffect(() => {
     axiosData(isInProces, props.route.params.id);
     err && Alert.alert("Error", err);
+  }, []);
 
+  useEffect(() => {
     props.navigation.setOptions({
       title: props.route.params.userName
         ? `${props.route.params.userName} tasks`
         : `All tasks`,
     });
-  }, [isInProces, props.route.params.userName]);
-
-  props.route.params.id && axiosUsersData();
+  }, [data]);
 
   const addToDo = (title: ToDoTitleType): void => {
     const newData: ToDoType = {
@@ -33,9 +35,10 @@ const Tasks = (props: tasksPropsType) => {
       title,
       completed: false,
       userId: props.route.params.id,
+      username: props.route.params.userName,
     };
 
-    AddNewTask(newData);
+    addNewTask(newData);
   };
 
   return (
