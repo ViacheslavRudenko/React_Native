@@ -14,3 +14,5 @@ export type usersType = {
 export type userPropsType = {
   navigation: NavigationProp<ParamListBase>;
 };
+
+export type userIdType = number | string;

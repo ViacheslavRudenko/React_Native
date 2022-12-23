@@ -1,9 +1,10 @@
 import { Dispatch } from "redux";
 import { getData, addTask, deleteTask, editTask } from "../../api/Tasks";
 import { ToDoIdType, ToDoType } from "../../Screens/Tasks/types";
+import { userIdType } from "../../Screens/User/types";
 import { TasksActionTypes, TasksAction } from "./types";
 
-export const axiosData = (userId: number | string, filter: string) => {
+export const axiosData = (userId: userIdType, filter: string) => {
   return async (dispatch: Dispatch<TasksAction>) => {
     dispatch({ type: TasksActionTypes.FETCH_TASKS });
     await getData(userId, filter)
@@ -22,7 +23,7 @@ export const axiosData = (userId: number | string, filter: string) => {
   };
 };
 
-export const deleteOneTask = (userId: number | string, taskId: ToDoIdType) => {
+export const deleteOneTask = (userId: userIdType, taskId: ToDoIdType) => {
   return async (dispatch: Dispatch<TasksAction>) => {
     await deleteTask(userId, taskId)
       .then((resp) =>
@@ -39,7 +40,7 @@ export const deleteOneTask = (userId: number | string, taskId: ToDoIdType) => {
       );
   };
 };
-export const addNewTask = (userId: number | string, task: ToDoType) => {
+export const addNewTask = (userId: userIdType, task: ToDoType) => {
   return async (dispatch: Dispatch<TasksAction>) => {
     await addTask(userId, task)
       .then((resp) =>
@@ -58,7 +59,7 @@ export const addNewTask = (userId: number | string, task: ToDoType) => {
 };
 
 export const editTaskData = (
-  userId: number | string,
+  userId: userIdType,
   taskId: ToDoIdType,
   task: ToDoType
 ) => {
