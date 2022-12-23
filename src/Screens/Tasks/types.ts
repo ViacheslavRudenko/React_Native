@@ -5,6 +5,7 @@ export type ToDoType = {
   title: string;
   completed: boolean;
   userId: string | number;
+  username: string;
 };
 
 export type ToDoTitleType = string;

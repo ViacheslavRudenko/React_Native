@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   TouchableOpacity,
   View,
@@ -7,22 +7,11 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import { useSelector } from "react-redux";
 import { useActions } from "../../../hooks/useActions";
-import { RootState } from "../../../store/root-reducer";
 import { propsItemType } from "./types";
 
 const ToDoListItem = (props: propsItemType) => {
-  const [userNick, setUserNick] = useState("");
   const { EditTask, RemoveTask } = useActions();
-  const data = useSelector((state: RootState) => state.Users.data);
-
-  useEffect(() => {
-    !props.userId &&
-      data.filter((item) => {
-        setUserNick(item.name);
-      });
-  }, []);
 
   const chnageStatusToDo = () => {
     const newData = {
@@ -55,7 +44,7 @@ const ToDoListItem = (props: propsItemType) => {
   const showUserTasks = () => {
     props.navigation.navigate("Tasks", {
       id: props.item.userId,
-      userName: userNick,
+      userName: props.item.username,
     });
   };
 
@@ -75,7 +64,7 @@ const ToDoListItem = (props: propsItemType) => {
 
         {!props.userId && (
           <Pressable style={styles.btnUserName} onPress={showUserTasks}>
-            <Text style={styles.btnUserNameText}>{userNick}</Text>
+            <Text style={styles.btnUserNameText}>@{props.item.username}</Text>
           </Pressable>
         )}
       </TouchableOpacity>
