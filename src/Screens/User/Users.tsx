@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, Button, View } from "react-native";
+import { Alert, View } from "react-native";
 import { useSelector } from "react-redux";
 import LoadingPage from "../../Components/Loading/Loading";
 import UserList from "../../Components/User/UserList";
@@ -20,13 +20,6 @@ const Users = (props: userPropsType) => {
     <LoadingPage />
   ) : (
     <View style={{ height: "100%" }}>
-      <View>
-        <Button
-          title="Show all tasks"
-          color="grey"
-          onPress={() => props.navigation.navigate("Tasks", {})}
-        />
-      </View>
       <UserList navigation={props.navigation} />
     </View>
   );
