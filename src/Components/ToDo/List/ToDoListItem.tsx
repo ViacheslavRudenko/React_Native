@@ -41,13 +41,6 @@ const ToDoListItem = (props: propsItemType) => {
     );
   };
 
-  const showUserTasks = () => {
-    props.navigation.navigate("Tasks", {
-      id: props.item.userId,
-      userName: props.item.username,
-    });
-  };
-
   return (
     <View style={styles.listItemBox}>
       <TouchableOpacity
