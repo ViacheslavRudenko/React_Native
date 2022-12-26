@@ -1,15 +1,13 @@
-import axios from "axios";
+import axios from "./axios";
 import { ToDoIdType } from "../Screens/Tasks/types";
 import { usersType } from "../Screens/User/types";
 
-export const getUsers = () => {
-  return axios.get<usersType[]>(
-    "https://63a025327aaf11ceb8a897ef.mockapi.io/Users"
-  );
+export const getUsers = async () => {
+  const result = await axios.get<usersType[]>("Users");
+  return result;
 };
 
-export const getUser = (id: ToDoIdType) => {
-  return axios.get<usersType[]>(
-    `https://63a025327aaf11ceb8a897ef.mockapi.io/Users${id}`
-  );
+export const getUser = async (id: ToDoIdType) => {
+  const result = await axios.get<usersType[]>(`Users${id}`);
+  return result;
 };
